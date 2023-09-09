@@ -1,0 +1,189 @@
+---
+title: "hhh"
+output: html_document
+date: "2023-04-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction and Background 
+```Every man has a right to his opinion, but no man has a right to be wrong in his facts.```
+
+The 2023 Nigerian presidential election was held on 25th February 2023. There were 93.4 million eligible voters for the February 25th polls, the sixth highest since Nigeria’s return to democracy in 1999.
+
+The Top contenders included Sir Ahmed Bola Tinubu, a two-term former governor of Lagos state(29 May 1999 – 29 May 2007), The trail Blazer and former Governor from the Labour party (LP) by the name Peter Obi Gregory, as well as the Peoples Democratic Party’s (PDP) Atiku Abubakar, a former vice president who was gunning for the position a record sixth time.
+
+The slow but painful decline of the Nigerian economy, Coupled with the rise in conflict, violence and economic instability in the nation had led to a cry for change, and people were willing to fight for it.Two major parties have consistently dominated proceedings in Nigeria's presidential elections, but from the thirst for a new party, a new candidate, with the promise of change.
+
+Although words speak volumes, its our actions that carry weight. Fortunately these candidates have served as governors of their respective states so We decided to take a microscope and analyze the impact and changes Two these two candidates made under their respective governorship tenures.
+ 
+## Business Task
+
+Through the use of historical date, This comparative analysis aims to review the years the candidates spent as Governors of their respective states, and identify if there was a positive correlation with economic prosperity, progress in key sectors, and growth especially in the areas the candidate advocates for.
+
+
+## Limitations
+The dataset presents specific gaps between(1999-2002). Those records will have to be extrapolated in order to fill in gap.
+The accuracies of the extrapolated datapoints average about 50%
+
+
+## Preparing the Dataset:
+
+Information on the data being used:
+Data was obtained from Global Data Lab (GDL) which is an independent data and research center at the Nijmegen School of Management of Radboud University. The specific data-set used was from the Sub national Human Development Index (SHDI), which is an average of the sub-national values of three dimensions: education, health and standard of living.
+ These parameters indicate key areas of economic prosperity. This dataset would be used to explore a comparative assessment of the two candidates.
+
+
+
+
+### Loading packages:
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(here)
+library(skimr)
+library(janitor)
+library(tidyr)
+library(lubridate)
+library(tidyverse)
+```
+
+
+### Importing Dataset:
+```{r}
+Nigeria <- SHDI_SGDI_Total_6_0
+```
+
+### Selecting Columns:
+```{r}
+Nigeria = Nigeria %>% 
+  select("region","year","shdi","healthindex","edindexf","edindexm","incindex","lifexp","esch","msch","lgnic")
+```
+
+### Filtering for all Nigerian states, then for Anambra and Lagos:
+```{r}
+
+Nigeria<- Nigeria%>%
+  filter_all(any_vars(. %in% c("Lagos", "Anambra")))
+
+```
+
+### For Anambra and Lagos:
+```{r}
+Anambra <- Nigeria %>% filter(region=='Anambra')
+Lagos <- Nigeria %>% filter(region=='Lagos')
+```
+
+ 
+* Lets take a look at the data-set
+
+```{r}
+glimpse(Nigeria)
+```
+
+
+### Column descriptions
+* Nhh - Number of households in dataset
+* wwrkhigh- Percentage of employed women who work in upper nonfarm jobs
+* hwrkhigh- Percentage of employed men who work in upper nonfarm jobs 
+* infmort- Number of deaths of children less than one year of age, per 1000 live births in a given year
+* shdi- Sub-national HDI
+* healthindex- Health index
+* edindexf= Educational index females
+* edindexm- Educational index males
+* incindex- Income index
+* lifexp- Life expectancy
+* esch- Expected years schooling children aged 6
+* msch- Mean years schooling population aged 25+
+* lgnic- Log Gross National Income per capita in 1000 US Dollars (2011 PPP)
+
+
+### Important Factors
+* Chief Bola Ahmed Adekunle Tinubu served as governor of Lagos state between 1997- 2007
+* Peter Obi Gregory CON served as governor of Anambra state from 2007 - 2014
+* The analysis focuses on the key areas of the Human development index: Income, Health and Education.
+* This is a comparative analysis of growth in these key factors from when they took office till when they relieved the seat.
+
+
+### Analyzing Dataset
+```{r}
+summary(Nigeria)
+```
+### Filtering for their respective tenure
+
+Descriptive Analysis
+---
+```{r}
+comp <- Merged_all
+Governorship <- comp %>%
+  filter(year %in% (1999:2014))
+PO <- Governorship %>%
+  filter(region=='Anambra', year %in% (2007:2014))
+
+BAT <- Governorship %>%
+  filter(region=='Lagos', year %in% (1999:2007))
+Joint <- bind_rows(PO,BAT)
+
+summary(Joint)
+```
+
+
+```{r}
+head(Joint)
+```
+
+
+```{r}
+Joint %>% 
+  group_by(region, year) %>%  
+  summarise(inc_index, gross_nat_inc) %>% 		
+  arrange(region, year)
+```
+
+
+```{r}
+Joint %>% 
+  group_by(region, year) %>%  
+  summarise(edu_index,health_index) %>% 		
+  arrange(region, year)
+```
+
+
+### Visualization
+
+Life exp vs year
+```{r}
+ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=life_exp))+facet_wrap(~region)+labs(y="Life expentancy", x="Year")
+```
+
+
+Health_ind vs Year
+```{r}
+ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=health_index))+facet_wrap(~region)+labs(y="health index", x="Year")
+```
+
+
+inc_index vs year
+```{r}
+ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=inc_index))+facet_wrap(~region)+labs(y="Income index", x="Year")
+```
+
+
+edu_index vs year
+```{r}
+ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=edu_index))+facet_wrap(~region)+labs(y="Educational index", x="Year")
+
+```
+
+
+#Key findings
+*During the tenure of Tinubu, Lagos state transformed into an economic powerhouse, witnessing a remarkable increase in its income index and solidifying its position as a thriving economic hub.
+
+*Anambra state underwent a significant transformation in terms of human development, particularly in the areas of education and health. The state witnessed a remarkable improvement, experiencing substantial advancements that positively impacted the educational landscape and healthcare services, leading to enhanced overall well-being and development.
+
+*###HDI Summary
+
+Both states under their respective governors experienced good growth. Both Obi and Tinubu performed well and administered their respective states in way that set a good foundation therefore allowing them to further thrive in the future.

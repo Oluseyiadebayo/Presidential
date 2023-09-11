@@ -1,20 +1,21 @@
-# Presidential
-HDI analysis of candidates for Nigeria's presidential Election 2023
+## Introduction and Background 
+```Every man has a right to his opinion, but no man has a right to be wrong in his facts.```
 
-The 2023 Nigerian election🇳🇬 was one of the most competitive and contentious presidential races🏁 in the country’s history. 
+The 2023 Nigerian presidential election was held on 25th February 2023. There were 93.4 million eligible voters for the February 25th polls, the sixth highest since Nigeria’s return to democracy in 1999.
 
-The voters wanted change✊ and were ready to fight for it. 
+The Top contenders included Sir Ahmed Bola Tinubu, a two-term former governor of Lagos state(29 May 1999 – 29 May 2007), The trail Blazer and former Governor from the Labour party (LP) by the name Peter Obi Gregory, as well as the Peoples Democratic Party’s (PDP) Atiku Abubakar, a former vice president who was gunning for the position a record sixth time.
 
-The race came down to three main contenders, who represented different visions for the future: the new🆕 vs the old👴. 
+The slow but painful decline of the Nigerian economy, Coupled with the rise in conflict, violence and economic instability in the nation had led to a cry for change, and people were willing to fight for it.Two major parties have consistently dominated proceedings in Nigeria's presidential elections, but from the thirst for a new party, a new candidate, with the promise of change.
 
-The choice was between embracing change (for better or worse) or sticking with the familiar devil😈. 
+Although words speak volumes, its our actions that carry weight. Fortunately these candidates have served as governors of their respective states so We decided to take a microscope and analyze the impact and changes Two these two candidates made under their respective governorship tenures.
+ 
+## Business Task
 
-Now, seven months after the ballots were cast and two months after the president’s inauguration🎉, the question remains: did the voters make the right choice❓ 
+Through the use of historical date, This comparative analysis aims to review the years the candidates spent as Governors of their respective states, and identify if there was a positive correlation with economic prosperity, progress in key sectors, and growth especially in the areas the candidate advocates for.
 
-We conducted an in-depth analysis🔎 of the performance of two candidates(Peter Obi, Bola Ahmed Tinubu) as governors of their respective states.
-We examined key indicators of economic progress💰 (income💵, health🏥, and education🎓) and the well-being of their citizens. 
 
-Our analysis is not meant to judge who would have been a better president, but to provide some context and insights into the effects of their leadership and policies. 
+## Limitations
+The dataset presents specific gaps between(1999-2002). Those records will have to be extrapolated in order to fill in gap.
+The accuracies of the extrapolated datapoints average about 50%
 
-Was there more substance behind the noise🗣️
 

@@ -13,6 +13,8 @@ Although words speak volumes, its our actions that carry weight. Fortunately the
 
 Through the use of historical date, This comparative analysis aims to review the years the candidates spent as Governors of their respective states, and identify if there was a positive correlation with economic prosperity, progress in key sectors, and growth especially in the areas the candidate advocates for.
 
+## Data Source
+The major dataset used is the Sub national Human Development Index (SHDI), which is an average of the sub-national values across three dimensions: Education, Health and Standard of living. These parameters indicate the key areas of economic prosperity. The dataset was used to explore a comparative assessment of the two candidates. 
 
 ## Limitations
 The dataset presents specific gaps between(1999-2002). Those records will have to be extrapolated in order to fill in gap.

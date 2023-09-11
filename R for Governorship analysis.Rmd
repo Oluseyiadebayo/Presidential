@@ -8,33 +8,12 @@ date: "2023-04-17"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introduction and Background 
-```Every man has a right to his opinion, but no man has a right to be wrong in his facts.```
-
-The 2023 Nigerian presidential election was held on 25th February 2023. There were 93.4 million eligible voters for the February 25th polls, the sixth highest since Nigeria’s return to democracy in 1999.
-
-The Top contenders included Sir Ahmed Bola Tinubu, a two-term former governor of Lagos state(29 May 1999 – 29 May 2007), The trail Blazer and former Governor from the Labour party (LP) by the name Peter Obi Gregory, as well as the Peoples Democratic Party’s (PDP) Atiku Abubakar, a former vice president who was gunning for the position a record sixth time.
-
-The slow but painful decline of the Nigerian economy, Coupled with the rise in conflict, violence and economic instability in the nation had led to a cry for change, and people were willing to fight for it.Two major parties have consistently dominated proceedings in Nigeria's presidential elections, but from the thirst for a new party, a new candidate, with the promise of change.
-
-Although words speak volumes, its our actions that carry weight. Fortunately these candidates have served as governors of their respective states so We decided to take a microscope and analyze the impact and changes Two these two candidates made under their respective governorship tenures.
- 
-## Business Task
-
-Through the use of historical date, This comparative analysis aims to review the years the candidates spent as Governors of their respective states, and identify if there was a positive correlation with economic prosperity, progress in key sectors, and growth especially in the areas the candidate advocates for.
-
-
-## Limitations
-The dataset presents specific gaps between(1999-2002). Those records will have to be extrapolated in order to fill in gap.
-The accuracies of the extrapolated datapoints average about 50%
-
-
+# DATA CLEANING
 ## Preparing the Dataset:
 
 Information on the data being used:
 Data was obtained from Global Data Lab (GDL) which is an independent data and research center at the Nijmegen School of Management of Radboud University. The specific data-set used was from the Sub national Human Development Index (SHDI), which is an average of the sub-national values of three dimensions: education, health and standard of living.
  These parameters indicate key areas of economic prosperity. This dataset would be used to explore a comparative assessment of the two candidates.
-
 
 
 
@@ -130,6 +109,9 @@ Joint <- bind_rows(PO,BAT)
 summary(Joint)
 ```
 
+The dataset contains data-points that go from 2003 - 2021, with the following data indicators - life expectancy, health index, income index, educational index
+Linear regression done with excel was used to extrapolate the records that go back to 1999 in order to accommodate Tinubu's Tenure from 199-2002.
+
 
 ```{r}
 head(Joint)
@@ -159,17 +141,50 @@ Life exp vs year
 ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=life_exp))+facet_wrap(~region)+labs(y="Life expentancy", x="Year")
 ```
 
+Currently both states have similar life expectancies (~61 years). 
+During tinubu's appointment (1999-2007).
+Lagos observed a 3% increase in expectancy during tinubu's term, which raised expectancy to 57.5 years. Lagos has constantly witnessed a steady increase in life expentancy during tinubu's tenure without reduction.  
+
+During Peter Obi's appointment (2007-2014).
+Anambra observed a 7% increase in expectancy during peter Obi's term , which raised expectancy to 57 years. More Significant improvements in anambra's life expentancy can be seen during Obi's tenure.
+
+Comparing - Anambra witnessed more changes in life expectancy than lagos state in the same period of time.
+
 
 Health_ind vs Year
 ```{r}
 ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=health_index))+facet_wrap(~region)+labs(y="health index", x="Year")
 ```
+A health index(HI) provides a single value for health that can show how health changes over time.
+Currently both states have similar HI of ~0.62
+During Tinubu's appointment (1999-2007).
+Lagos observed an overall reduction of 3% in its HI. Lagos witnessed a small change in HI during tinubu's tenure. HI continued to remain steady until sometime in 2013 (0.56) where it increased to 0.62. These reduction could be attributed to a rapid increase in the population of Lagos, which might have resulted in the states inability to manage such as increase.
+
+During Peter Obi's appointment (2007-2014).
+Anambra observed an overall increase of 14% in its HI. Anambra witnessed a more significant increase during obi's tenure. HI has continued to be steadily increasing since the with no slowdowns.
+
+Comparing - Anambra witnessed more changes in life expectancy than lagos state in the same period of time. 
+
+Conclusion
+These results support the life expectancy increase witnessed by anambra & lagos. It would seems that Obi implemented and carried out more health initiatives during his tenure.
 
 
 inc_index vs year
 ```{r}
 ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=inc_index))+facet_wrap(~region)+labs(y="Income index", x="Year")
 ```
+
+The income index is a measure that assesses the level of income or economic well-being within a country.
+
+Currently the income index for Lagos and Anambra are 0.65 and 0.64 respectively
+
+During Tinubu's appointment (1999-2007).
+Lagos observed an increase of 31% in its income index. During Tinubu's tenure, Lagos experienced a more significant increase in its overall gross national income. Lagos income index peaked at the end of Tinubu's tenure and was fairly stable until 2015 when it underwent a reduction.
+
+During Peter Obi's appointment (2007-2014).
+Anambra observed an increase of 9% in its income index. During Obi's tenure, Anambra also experienced a significant increase of Gross national income. Anambra income index peaked at the end of Obi's term before undergoing a reducing trend to where it is at currently.
+
+Comparing - Lagos made more strides in increasing the states overall gross national income compared to Anambra.
 
 
 edu_index vs year
@@ -178,12 +193,25 @@ ggplot(data=Joint) + geom_line(mapping=aes(x=year,y=edu_index))+facet_wrap(~regi
 
 ```
 
+The Education Index is measured by the adult literacy rate (with two-thirds weighting) and the combined primary, secondary, and tertiary gross enrollment ratio (with one-third weighting).
+
+Currently the Educational index for Lagos and Anambra are 0.75 and 0.7 respectively
+
+During Tinubu's appointment (1999-2007).
+Lagos experienced an overall reduction of its educational index of about 4%. Lagos experienced a moderate change in its educational index during tinubu's tenure. Overall the education index in lagos has undergone a few dips(2003, 2010) before trending up to 0.75 in 2021.
+
+During Peter Obi's appointment (2007-2014).
+Anambra experienced an overall increase of its educational index of about 15%. Anambra experienced a more significant change in its educational index during Obi's tenure. It witnessed a small decline from 2005 -2010, from 2010 further it started trending upwards till 0.7 currently.
+
+Comparing - Anambra witnessed a more significant change in its EI than Lagos state during a similar period of time.
+
+
 
 #Key findings
 *During the tenure of Tinubu, Lagos state transformed into an economic powerhouse, witnessing a remarkable increase in its income index and solidifying its position as a thriving economic hub.
 
 *Anambra state underwent a significant transformation in terms of human development, particularly in the areas of education and health. The state witnessed a remarkable improvement, experiencing substantial advancements that positively impacted the educational landscape and healthcare services, leading to enhanced overall well-being and development.
 
-*###HDI Summary
+###HDI Summary
 
 Both states under their respective governors experienced good growth. Both Obi and Tinubu performed well and administered their respective states in way that set a good foundation therefore allowing them to further thrive in the future.
